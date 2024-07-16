@@ -35,7 +35,8 @@ exports.get = async (req, res, next) => {
         const filters = buildUserQueryFilters(req.query);
 
         const users = await User.findAll({
-            where: filters
+            where: filters,
+            attributes: ['id', 'name', 'document', 'email', 'phone', 'birthDate', 'createdAt', 'updatedAt']
         });
 
         if (users === null) {
@@ -61,7 +62,12 @@ exports.getById = async (req, res, next) => {
 
         const id = req.params.id;
     
-        const user = await User.findByPk(id);
+        const user = await User.findByPk(id, 
+            {
+              attributes: {
+                 exclude: ['password']
+              }
+            });
         if (user === null) {
             return res.status(404).send({
                 error: "User not found with this id."
