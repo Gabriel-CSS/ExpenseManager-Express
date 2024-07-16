@@ -1,8 +1,7 @@
-Expense Manager API
-
+## Expense Manager API
 This API was created to exercise my knowledge acquired in NodeJS.
 
-Technologies used:
+## ⚙️ Technologies used:
 - ExpressJS
 - PostgreSQL
 - Sequelize
