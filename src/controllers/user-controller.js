@@ -3,27 +3,38 @@
 const sequelizeDatabase = require('../database/sequelize-database');
 const User = require('../models/user');
 const { Op } = require('sequelize');
+const { encryptPassword, authenticate } = require('../services/authService');
 
 exports.post = async (req, res, next) => {
-    try
-    {
+    try {
         await sequelizeDatabase.sync();
     
+        const encPass = await encryptPassword(req.body.password);
         const newUser = await User.create({
             name: req.body.name,
             document: req.body.document,
             email: req.body.email,
             phone: req.body.phone,
             birthDate: req.body.birthDate,
-            password: req.body.password
+            password: encPass
         });
+
+        const token = await authenticate(req.body.email, req.body.password);
     
         res.status(200).send({
-            newUser
+            user: {
+                id: newUser.id,
+                name: newUser.name,
+                document: newUser.document,
+                email: newUser.email,
+                phone: newUser.phone,
+                birthDate: newUser.birthDate
+            },
+            token
         });
     } catch (error) {
         return res.status(500).send({
-            error: error
+            error
         });
     }
 };
@@ -56,8 +67,7 @@ exports.get = async (req, res, next) => {
 };
 
 exports.getById = async (req, res, next) => {
-    try
-    {
+    try {
         await sequelizeDatabase.sync();
 
         const id = req.params.id;
