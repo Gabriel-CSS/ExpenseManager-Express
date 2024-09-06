@@ -7,8 +7,6 @@ const { encryptPassword, authenticate } = require('../services/authService');
 
 exports.login = async (req, res, next) => {
     try {
-        await sequelizeDatabase.sync();
-    
         const token = await authenticate(req.body.email, req.body.password);
     
         res.status(200).send({
@@ -22,8 +20,6 @@ exports.login = async (req, res, next) => {
 
 exports.post = async (req, res, next) => {
     try {
-        await sequelizeDatabase.sync();
-    
         const encPass = await encryptPassword(req.body.password);
         const newUser = await User.create({
             name: req.body.name,
@@ -31,6 +27,7 @@ exports.post = async (req, res, next) => {
             email: req.body.email,
             phone: req.body.phone,
             birthDate: req.body.birthDate,
+            address: req.body.address,
             password: encPass
         });
 
@@ -43,7 +40,8 @@ exports.post = async (req, res, next) => {
                 document: newUser.document,
                 email: newUser.email,
                 phone: newUser.phone,
-                birthDate: newUser.birthDate
+                birthDate: newUser.birthDate,
+                address: newUser.address
             },
             token
         });
@@ -55,13 +53,11 @@ exports.post = async (req, res, next) => {
 
 exports.get = async (req, res, next) => {
     try {
-        await sequelizeDatabase.sync();
-
         const filters = buildUserQueryFilters(req.query);
 
         const users = await User.findAll({
             where: filters,
-            attributes: ['id', 'name', 'document', 'email', 'phone', 'birthDate', 'createdAt', 'updatedAt']
+            attributes: ['id', 'name', 'document', 'email', 'phone', 'birthDate', 'address', 'createdAt', 'updatedAt']
         });
 
         if (users === null) {
@@ -81,8 +77,6 @@ exports.get = async (req, res, next) => {
 
 exports.getById = async (req, res, next) => {
     try {
-        await sequelizeDatabase.sync();
-
         const id = req.params.id;
     
         const user = await User.findByPk(id, 
@@ -111,8 +105,6 @@ exports.put = async (req, res, next) => {
     const userData = req.body;
 
     try {
-        await sequelizeDatabase.sync();
-
         const user = await User.findByPk(id);
         if (user === null) {
             return res.status(404).send({
@@ -125,6 +117,7 @@ exports.put = async (req, res, next) => {
         user.document = userData.document;
         user.phone = userData.phone;
         user.birthDate = userData.birthDate;
+        user.address = userData.address;
 
         await user.save();
 
@@ -141,8 +134,6 @@ exports.delete = async (req, res, next) => {
     const id = req.params.id;
 
     try {
-        await sequelizeDatabase.sync();
-
         const user = await User.findByPk(id);
         if (user === null) {
             return res.status(404).send({

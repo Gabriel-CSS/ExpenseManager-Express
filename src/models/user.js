@@ -30,6 +30,10 @@ const User = sequelizeDatabase.define('User', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    address: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
     birthDate: {
         type: Sequelize.DATE,
         allowNull: true
