@@ -5,6 +5,22 @@ const User = require('../models/user');
 const { Op } = require('sequelize');
 const { encryptPassword, authenticate } = require('../services/authService');
 
+exports.login = async (req, res, next) => {
+    try {
+        await sequelizeDatabase.sync();
+    
+        const token = await authenticate(req.body.email, req.body.password);
+    
+        res.status(200).send({
+            token
+        });
+    } catch (error) {
+        return res.status(500).send({
+            error
+        });
+    }
+};
+
 exports.post = async (req, res, next) => {
     try {
         await sequelizeDatabase.sync();
@@ -89,7 +105,7 @@ exports.getById = async (req, res, next) => {
         });
     } catch (error) {
         return res.status(500).send({
-            error
+            error: error
         });
     }
 };
