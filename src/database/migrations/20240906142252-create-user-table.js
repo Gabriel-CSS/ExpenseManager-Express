@@ -1,47 +1,53 @@
-const Sequelize = require('sequelize');
-const sequelizeDatabase = require('../database/sequelize-database');
+'use strict';
 
-const User = sequelizeDatabase.define('User', {
-    id: {
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up (queryInterface, Sequelize) {
+    await queryInterface.createTable('Users', {
+      id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
-    },
-    name: {
+      },
+      name: {
         type: Sequelize.STRING,
         allowNull: false
-    },
-    document: {
+      },
+      document: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true
-    },
-    email: {
+      },
+      email: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true
-    },
-    password: {
+      },
+      password: {
         type: Sequelize.STRING,
         allowNull: false
-    },
-    phone: {
+      },
+      phone: {
         type: Sequelize.STRING,
         allowNull: false
-    },
-    birthDate: {
+      },
+      birthDate: {
         type: Sequelize.DATE,
         allowNull: true
-    },
-    createdAt: {
+      },
+      createdAt: {
         type: Sequelize.DATE,
         allowNull: false
-    },
-    updatedAt: {
+      },
+      updatedAt: {
         type: Sequelize.DATE,
         allowNull: false
-    }
-});
+      }
+    });
+  },
 
-module.exports = User;
+  async down (queryInterface, Sequelize) {
+    await queryInterface.dropTable('Users');
+  }
+};

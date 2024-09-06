@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
-let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, PGPORT } = process.env;
+let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, PGPORT, PGDIALECT } = process.env;
 
 const sequelize = new Sequelize(PGDATABASE, PGUSER, PGPASSWORD, {
-    dialect: 'postgres',
+    dialect: PGDIALECT,
     dialectOptions: {
         ssl: {
         require: true
