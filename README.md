@@ -71,10 +71,6 @@ Swagger API documentation is available at `http://localhost:3000/swagger-docs` w
 - `PUT /users/:id`: Update a user
 - `DELETE /users/:id`: Remove a user
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
 ## Contact
 
 Gabriel Silva - Discord: [gabrielcss](https://discordapp.com/channels/@me/gabrielcss)
