@@ -15,9 +15,8 @@ exports.login = async (req, res, next) => {
             token
         });
     } catch (error) {
-        return res.status(500).send({
-            error
-        });
+        const errorMessage = error.message || "An unexpected error occurred during this action.";
+        return res.status(500).send({ error: errorMessage });
     }
 };
 
@@ -49,9 +48,8 @@ exports.post = async (req, res, next) => {
             token
         });
     } catch (error) {
-        return res.status(500).send({
-            error
-        });
+        const errorMessage = error.message || "An unexpected error occurred during this action.";
+        return res.status(500).send({ error: errorMessage });
     }
 };
 
@@ -76,9 +74,8 @@ exports.get = async (req, res, next) => {
             users
         });
     } catch (error) {
-        return res.status(500).send({
-            error
-        });
+        const errorMessage = error.message || "An unexpected error occurred during this action.";
+        return res.status(500).send({ error: errorMessage });
     }
 };
 
@@ -104,9 +101,8 @@ exports.getById = async (req, res, next) => {
             user
         });
     } catch (error) {
-        return res.status(500).send({
-            error: error
-        });
+        const errorMessage = error.message || "An unexpected error occurred during this action.";
+        return res.status(500).send({ error: errorMessage });
     }
 };
 
@@ -136,9 +132,8 @@ exports.put = async (req, res, next) => {
             user
         });
     } catch (error) {
-        return res.status(500).send({
-            error
-        });
+        const errorMessage = error.message || "An unexpected error occurred during this action.";
+        return res.status(500).send({ error: errorMessage });
     }
 };
 
@@ -159,9 +154,8 @@ exports.delete = async (req, res, next) => {
 
         return res.status(200).send();
     } catch (error) {
-        return res.status(500).send({
-            error
-        });
+        const errorMessage = error.message || "An unexpected error occurred during this action.";
+        return res.status(500).send({ error: errorMessage });
     }
 };
 
