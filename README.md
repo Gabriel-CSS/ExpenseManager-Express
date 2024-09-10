@@ -64,12 +64,20 @@ Swagger API documentation is available at `http://localhost:3000/swagger-docs` w
 
 ## Main Routes
 
+### Users
 - `GET /users`: List all users
 - `GET /users/:id`: Get a specific user
 - `POST /users`: Create a new user
 - `POST /users/login`: User login
 - `PUT /users/:id`: Update a user
 - `DELETE /users/:id`: Remove a user
+
+### Expenses
+- `GET /expenses`: List all expenses
+- `GET /expenses/:id`: Get a specific expense
+- `POST /expenses`: Create a new expense
+- `PUT /expenses/:id`: Update a expense
+- `DELETE /expenses/:id`: Remove a expense
 
 ## Contact
 

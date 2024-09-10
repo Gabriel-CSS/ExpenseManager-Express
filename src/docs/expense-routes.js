@@ -1,51 +1,47 @@
 /**
  * @swagger
  * tags:
- *   name: Users
- *   description: User related operations
+ *   name: Expenses
+ *   description: Expense related operations
  */
 
 /**
  * @swagger
- * /users:
+ * /expenses:
  *   get:
- *     summary: Returns the list of users
- *     tags: [Users]
+ *     summary: Returns the list of expenses
+ *     tags: [Expenses]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: name
+ *         name: description
  *         schema:
  *           type: string
  *       - in: query
- *         name: email
- *         schema:
- *           type: string
- *       - in: query
- *         name: birthDate
+ *         name: date
  *         schema:
  *           type: string
  *           format: date
  *     responses:
  *       200:
- *         description: List of users
+ *         description: List of expenses
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/User'
+ *                 $ref: '#/components/schemas/Expense'
  *       401:
  *         description: Unauthorized
  */
 
 /**
  * @swagger
- * /users/{id}:
+ * /expenses/{id}:
  *   get:
- *     summary: Returns a user by ID
- *     tags: [Users]
+ *     summary: Returns an expense by ID
+ *     tags: [Expenses]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -56,46 +52,50 @@
  *           type: integer
  *     responses:
  *       200:
- *         description: User details
+ *         description: Expense details
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               $ref: '#/components/schemas/Expense'
  *       401:
  *         description: Unauthorized
  *       404:
- *         description: User not found
+ *         description: Expense not found
  */
 
 /**
  * @swagger
- * /users:
+ * /expenses:
  *   post:
- *     summary: Creates a new user
- *     tags: [Users]
+ *     summary: Creates a new expense
+ *     tags: [Expenses]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/UserCreateInput'
+ *             $ref: '#/components/schemas/ExpenseCreateInput'
  *     responses:
  *       200:
- *         description: User created successfully
+ *         description: Expense created successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/UserCreateResponse'
+ *               $ref: '#/components/schemas/Expense'
  *       400:
  *         description: Invalid data
+ *       401:
+ *         description: Unauthorized
  */
 
 /**
  * @swagger
- * /users/{id}:
+ * /expenses/{id}:
  *   put:
- *     summary: Updates a user
- *     tags: [Users]
+ *     summary: Updates an expense
+ *     tags: [Expenses]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -109,14 +109,14 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/UserUpdateInput'
+ *             $ref: '#/components/schemas/ExpenseUpdateInput'
  *     responses:
  *       200:
- *         description: User updated successfully
+ *         description: Expense updated successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               $ref: '#/components/schemas/Expense'
  *       400:
  *         description: Invalid data
  *       401:
@@ -125,10 +125,10 @@
 
 /**
  * @swagger
- * /users/{id}:
+ * /expenses/{id}:
  *   delete:
- *     summary: Deletes a user
- *     tags: [Users]
+ *     summary: Deletes an expense
+ *     tags: [Expenses]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -139,38 +139,11 @@
  *           type: integer
  *     responses:
  *       200:
- *         description: User deleted successfully
- *       404:
- *         description: User not found
+ *         description: Expense deleted successfully
  *       401:
  *         description: Unauthorized
- */
-
-/**
- * @swagger
- * /users/login:
- *   post:
- *     summary: Login user
- *     tags: [Users]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/LoginInput'
- *     responses:
- *       200:
- *         description: Successful login
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 token:
- *                   type: string
- *                   description: JWT token for authentication
- *       400:
- *         description: Invalid credentials
+ *       404:
+ *         description: Expense not found
  */
 
 module.exports = {};

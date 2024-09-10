@@ -1,6 +1,5 @@
 'use strict';
 
-const sequelizeDatabase = require('../database/sequelize-database');
 const User = require('../models/user');
 const { Op } = require('sequelize');
 const { encryptPassword, authenticate } = require('../services/authService');

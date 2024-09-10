@@ -7,6 +7,7 @@ const app = express();
 
 const indexRoute = require('./routes/index-route');
 const userRoute = require('./routes/user-route');
+const expenseRoute = require('./routes/expense-route');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -17,5 +18,6 @@ app.use('/swagger-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/', indexRoute);
 app.use('/users', userRoute);
+app.use('/expenses', expenseRoute);
 
 module.exports = app;
